@@ -12,7 +12,6 @@ public static class ApplicationServiceExtensions
      IConfiguration config)
     {
         
-
         services.AddControllers();
 
         services.AddDbContext<DataContext>(opt =>
