@@ -20,22 +20,23 @@ public class AccountController(DataContext context, ITokenService tokenService) 
         {
             return BadRequest("A user with that name is already in the system");
         }
+        return Ok();
 
-        using var hmac = new HMACSHA512(); // using 'using' to dispose it after use
+        // using var hmac = new HMACSHA512(); // using 'using' to dispose it after use
 
-        var user = new AppUser{
-            UserName = registerDto.Username.ToLower(),
-            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-            PasswordSalt = hmac.Key
-        };
+        // var user = new AppUser{
+        //     UserName = registerDto.Username.ToLower(),
+        //     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+        //     PasswordSalt = hmac.Key
+        // };
 
-        context.Users.Add(user);
-        await context.SaveChangesAsync();
+        // context.Users.Add(user);
+        // await context.SaveChangesAsync();
 
-        return new UserDto{
-            UserName = user.UserName,
-            Token = tokenService.CreateToken(user)
-        };
+        // return new UserDto{
+        //     UserName = user.UserName,
+        //     Token = tokenService.CreateToken(user)
+        // };
     }
 
     [HttpPost("login")]
